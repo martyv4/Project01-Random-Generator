@@ -5,85 +5,72 @@ project 1 - A Random Quote Generator
 
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
-
-/*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
-***/
-
+//hasCitation hasYear hasTags are booleans to check to determine if the object has citation year or tags respectively
 var quotes = [
 	{
 	quote: 'Some are born great, some achieve greatness, and some have greatness thrust upon \'em',
 	source: 'William Shakespeare',
 	citation: 'Twelfth Night',
 	year: 1601,
+	medium: 'Play',
 	hasCitation: true,
-	hasYear: true
+	hasYear: true,
+	hasTags: true,
+	tags: 'Literature, English'
 	},
 	{
 	quote: 'When you find your path, you must not be afraid. You need to have sufficient courage to make mistakes.',
 	source: 'Paulo Coelho',
 	citation: 'Brida',
 	year: 1990,
+	medium: 'Novel',
 	hasCitation: true,
-	hasYear: true
+	hasYear: true,
+	hasTags: true,
+	tags: 'Poetry, Inspirational'
 	},
 	{
 	quote: 'Even if smog were a risk to human life, we must remember that life in nature, without technology, is wholesale death.',
 	source: 'Ayn Rand',
+	medium: 'Speech',
 	hasCitation: false,
-	hasYear: false
+	hasYear: false,
+	hasTags: false
 	},	
 	{
 	quote: 'Great wealth can only be obtained through deception and corruption.',
 	source: 'His Holiness, Tenzin Gyatso, the 14th Dalai Lama',
 	year: 1974,
+	medium: 'Speech',
 	hasCitation: false,
-	hasYear: true
+	hasYear: true,
+	hasTags: false
 	},
 	{
 	quote: 'In politics, if you want anything said, ask a man; if you want anything done, ask a woman.',
 	source: 'Margaret Thatcher',
 	citation: 'Speech to members of the National Union of Townswomen\'s Guilds',
+	medium: 'Speech',
 	hasCitation: true,
-	hasYear: false
+	hasYear: false,
+	hasTags: true,
+	tags: 'Politics, English'
 	},
 
 ];
 
 console.log(quotes);
 
-/***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Use the random number to `return` a random quote object from the `quotes` array.
-***/
 function getRandomQuote()
 {
 	// generates random number between 0 and quotes.length - 1
-	var randomNumber = Math.floor(Math.random() * quotes.length); 
+	var randomNumber = Math.floor(Math.random() * quotes.length);
 	// return the object in quotes at position randomNumber
 	return quotes[randomNumber];
 }
 
 console.log(getRandomQuote());
 
-/***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
 function printQuote()
 {
 	var objQuote = getRandomQuote();
@@ -104,17 +91,47 @@ function printQuote()
 	//close source p tag
 	htmlQuote = htmlQuote + '</p>';
 
-document.getElementById("quote-box").innerHTML = htmlQuote;
+	//if statement - check for existence of tags
+	if (objQuote.hasTags)
+	{
+	htmlQuote = htmlQuote + '<p class="tags">Tags: ' + objQuote.tags + '</p>';
+	}
+	
+	htmlQuote = htmlQuote + '<p class="medium">From a ' + objQuote.medium + '</p>';
+
+	document.getElementById("quote-box").innerHTML = htmlQuote;
+	
+	//color is represented as 6 digit hex, 000000 through ffffff
+	//generate six random numbers between 0 and 16 and assign that color
+	var colorCode = '#';
+	
+	var randomNumber = Math.floor(Math.random() * 16);
+	colorCode = colorCode + randomNumber.toString(16);
+	
+	randomNumber = Math.floor(Math.random() * 16);
+	colorCode = colorCode + randomNumber.toString(16);
+	
+	randomNumber = Math.floor(Math.random() * 16);
+	colorCode = colorCode + randomNumber.toString(16);
+	
+	randomNumber = Math.floor(Math.random() * 16);
+	colorCode = colorCode + randomNumber.toString(16);
+	
+	randomNumber = Math.floor(Math.random() * 16);
+	colorCode = colorCode + randomNumber.toString(16);
+	
+	randomNumber = Math.floor(Math.random() * 16);
+	colorCode = colorCode + randomNumber.toString(16);
+	
+	console.log(colorCode);
+	
+	//assign random color code to page's backgroundColor property
+	document.body.style.backgroundColor = colorCode;
+	
 }
 
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
+//randomize quote constantly every 20 seconds = 20000 milliseconds
+setInterval( "printQuote()", 20000 );
 
+//attach onclick listener to loadQuote element
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
