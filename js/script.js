@@ -6,7 +6,7 @@ project 1 - A Random Quote Generator
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
 //hasCitation hasYear hasTags are booleans to check to determine if the object has citation year or tags respectively
-var quotes = [
+let quotes = [
 	{
 	quote: 'Some are born great, some achieve greatness, and some have greatness thrust upon \'em',
 	source: 'William Shakespeare',
@@ -64,7 +64,7 @@ console.log(quotes);
 function getRandomQuote()
 {
 	// generates random number between 0 and quotes.length - 1
-	var randomNumber = Math.floor(Math.random() * quotes.length);
+	let randomNumber = Math.floor(Math.random() * quotes.length);
 	// return the object in quotes at position randomNumber
 	return quotes[randomNumber];
 }
@@ -73,8 +73,8 @@ console.log(getRandomQuote());
 
 function printQuote()
 {
-	var objQuote = getRandomQuote();
-	var htmlQuote = '';
+	let objQuote = getRandomQuote();
+	let htmlQuote = '';
 	//concatenate html tags with object properties
 	htmlQuote = htmlQuote + '<p class="quote">' + objQuote.quote + '</p>';
 	htmlQuote = htmlQuote + '<p class="source">' + objQuote.source;
@@ -103,9 +103,9 @@ function printQuote()
 	
 	//color is represented as 6 digit hex, 000000 through ffffff
 	//generate six random numbers between 0 and 16 and assign that color
-	var colorCode = '#';
+	let colorCode = '#';
 	
-	var randomNumber = Math.floor(Math.random() * 16);
+	let randomNumber = Math.floor(Math.random() * 16);
 	colorCode = colorCode + randomNumber.toString(16);
 	
 	randomNumber = Math.floor(Math.random() * 16);
